@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Checkbackmagoria of Number View" property="og:title" />
+    <meta content="Blessings from other galaxies and the flow of prosperity... You will need to check back later..." property="og:description" />
+    <meta content="https://https://demonin.com/games/checkBack3/" property="og:url" />
+    <meta content="https://demonin.com/https://demonin.com/games/checkBack3/img/logo.png" property="og:image" />
+    <meta content="#daabf0" data-react-helmet="true" name="theme-color" />
+    <title>Checkbackmagoria</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="img/clock.png">
+</head>
+<body>
+    <canvas id="starsBackground"></canvas>
+
+    <!-- Potency bar -->
+    <div id="potencyBar">
+        <div id="potencyBarInner"></div>
+        <p id="potencyBarText">Potency: 0.0/5.0
+        </p>
+    </div>
+    <!-- Power bar -->
+    <div id="powerBar">
+        <div id="powerBarInner"></div>
+        <p id="powerBarText">Power: 0/50
+        </p>
+    </div>
+    <!-- Mastery bar -->
+    <div id="masteryBar">
+        <div id="masteryBarInner"></div>
+        <p id="masteryBarText">Mastery: 0
+        </p>
+    </div>
+    <!-- Potency buttons -->
+    <div class="gameDiv"  style="left: 0; border: 0.4vh solid #cad;">
+        <div id="potencyButtonDiv">
+            <button id="potencyAllButton" onclick="gainAllPotency()">Summon all potency</button><br>
+            <button class="potencyButton" onclick="gainPotency(1)">Summon 1.0 potency</button>
+            <button class="potencyButton" onclick="gainPotency(2)">Summon 3.0 potency</button>
+        </div>
+        <p style="text-align: center" id="potencyButtonUnlockText">Next button unlocks at 1 power</p>
+    </div>
+    <!-- Towers -->
+    <div class="gameDiv" style="left: 25vw; border: 0.4vh solid #dac;">
+        <div id="towerDivOuter">
+        </div>
+        <p style="text-align: center" id="towerUnlockText">Next tower unlocks at 10 power</p>
+    </div>
+    <div id="towerInfoDiv">
+        <img id="towerInfoImage" src="img/tower1.png" alt="Tower Image">
+        <p id="towerInfoTitle"></p>
+        <p id="towerInfo"></p>
+    </div>
+    <!-- Chests -->
+    <div class="gameDiv" style="left: 50vw; border: 0.4vh solid #daa;">
+        <div id="chestDivOuter">
+        </div>
+        <p style="text-align: center" id="chestUnlockText">Next chest unlocks at 5 power</p>
+    </div>
+    <div id="chestInfoDiv">
+        <img id="chestInfoImage" src="img/chest1.png" alt="Chest Image">
+        <p id="chestInfoTitle"></p>
+        <p id="chestInfo"></p>
+    </div>
+    <!-- Resources -->
+    <div class="gameDiv" style="left: 75vw; border: 0.4vh solid #dca; height: 64vh;">
+        <button id="artifactListButton" onclick="displayArtifactList()">Artifact list</button>
+        <p>Active artifacts</p>
+        <div id="activeItemDivOuter">
+        </div><br>
+        <p>Storage</p>
+        <div id="inventoryItemDivOuter">
+        </div><hr>
+        <p id="berryTextDiv">
+        </p>
+    </div>
+    <!-- Mastery div -->
+    <div id="masteryDiv">
+        <p style="color: #ffa">You have <span id="unspentMasteryPoints">0</span> unspent mastery points</p>
+        <button class="masteryPointUpgrade" onclick="buyMasteryUpgrade(1)">Increase active artifact slots<br>2 -> 3<br>Costs 10 points</button>
+        <button class="masteryPointUpgrade" onclick="buyMasteryUpgrade(2)">Increase storage slots<br>2 -> 3<br>Costs 4 points</button>
+        <button class="masteryPointUpgrade" onclick="buyMasteryUpgrade(3)">Increase potency gain<br>x1.00 -> x1.20<br>Costs 6 points</button>
+    </div>
+    <!-- Settings -->
+    <div id="settingsDiv">
+        <button onclick="save()">Save</button>
+        <button onclick="exportGame()">Export</button>
+        <button onclick="importGame()">Import</button>
+        <button onclick="hardReset()">Hard reset</button>
+        <p id="versionInfo">v0.3.1<br>Checkbackmagoria of Number View</p>
+    </div>
+    <!-- Vases -->
+    <div id="vaseDiv">
+        <p id="vaseText">You have 0 vases, multiplying potency gain by x1.00</p><br>
+        <img class="vase" src="img/vase1.png" />
+        <img class="vase" src="img/vase2.png" />
+        <img class="vase" src="img/vase3.png" />
+        <img class="vase" src="img/vase4.png" />
+        <img class="vase" src="img/vase5.png" />
+        <img class="vase" src="img/vase6.png" />
+    </div>
+    <!-- Artifact list -->
+    <div id="artifactListDiv">
+        <p style="width: 92%">Artifacts that have been seen at least 10 times are <span style="color: rgb(255, 247, 170)">gold</span> and have (mostly) doubled effects!<br>
+        Artifacts that have been seen at least 50 times are <span style="color: rgb(170, 245, 255)">diamond</span> and have (mostly) tripled effects!</p>
+        <button id="artifactListCloseButton" onclick="hideArtifactList()">x</button>
+        <div id="artifactList"></div>
+    </div>
+    <!-- Item gain overlay -->
+    <div id="itemGainOverlay" onclick="nextQueueItem()">
+        <p id="itemGainText"></p>
+        <p id="itemGainSubtext"></p>
+        <div id="itemGainIcon"></div>
+        <p id="itemGainSubtext2"></p>
+        <p id="itemGainSubtext3"></p>
+        <div id="activeItemCompareDiv">
+        </div>
+        <div id="inventoryItemCompareDiv">
+        </div>
+        <button id="discardItemButton" onclick="nextItemGain(); event.stopPropagation()">Discard item</button>
+    </div>
+    <!-- Item tooltip -->
+    <div id="itemTooltip">
+        <p id="itemTooltipTitle"></p>
+        <p id="itemTooltipText"></p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="background.js"></script>
+    <script src="constants.js?v031=1"></script>
+    <script src="script.js?v031=1"></script>
+    <!-- <script defer>setAutoSave()</script> -->
+</body>
+</html>

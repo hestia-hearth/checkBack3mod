@@ -1,0 +1,465 @@
+@font-face {
+  font-family: "Otsutome";
+  src: url(fonts/OtsutomeFont.woff);
+}
+
+body {
+    background-color: #0d022c;
+    overflow: hidden;
+}
+
+#starsBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+p {
+    font-family: "Otsutome";
+    font-size: 18px;
+    color: white;
+    margin: 6px;
+}
+
+button {
+    background-color: #daabf0;
+    border: 3px solid #4f1ca1;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: "Otsutome";
+    font-size: 18px;
+    color: #4f1ca1;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: auto;
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+hr {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #97b;
+}
+
+#potencyBar {
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    width: 100%;
+    height: 8vh;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#potencyBarInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    /*background-color: #fc3772;*/
+    background-image: linear-gradient(to bottom, #fa5e8d, #fc3772, #c92b5a);
+    z-index: 1;
+    transition: ease-out 0.5s;
+}
+
+#powerBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8vh;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#powerBarInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    /*background-color: #fc8637;*/
+    background-image: linear-gradient(to bottom, #ff9837, #fc8637, #f86f2f);
+    z-index: 1;
+    transition: ease-out 0.5s;
+}
+
+#masteryBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+#masteryBarInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    width: 100%;
+    /*background-color: #ecd138;*/
+    background-image: linear-gradient(to bottom, #fffb3c, #ecd138, #ecbf2c);
+    z-index: 1;
+    transition: ease-out 0.5s;
+}
+
+#potencyBarText, #powerBarText, #masteryBarText {
+    position: relative;
+    color: white;
+    text-align: center;
+    line-height: 8vh;
+    margin: 0;
+    font-size: 3.2vh;
+    z-index: 2;
+}
+
+.gameDiv {
+    position: absolute;
+    top: 16vh;
+    width: calc(25vw - 2vh);
+    height: 82vh;
+    margin: 1vh;
+    padding: 6px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.potencyButton, #potencyAllButton {
+    width: 100%;
+    display: block;
+}
+
+.towerDiv {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    user-select: none;
+}
+
+.towerDiv:hover {
+    background-color: rgba(255,255,255,0.15);
+}
+
+#towerInfoDiv {
+    position: absolute;
+    top: 16vh;
+    left: 50vw;
+    width: calc(25vw - 2vh);
+    height: 82vh;
+    margin: 1vh;
+    padding: 6px;
+    border: 0.4vh solid #daa;
+    background-color: rgb(44, 22, 41);
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 2;
+    display: none;
+}
+
+#towerInfoImage, #chestInfoImage {
+    width: 96px;
+    margin: auto;
+    margin-top: 6px;
+    display: block;
+}
+
+#towerInfoTitle, #chestInfoTitle {
+    text-align: center;
+    font-size: 2.5vw;
+    margin-top: 6px;
+}
+
+#towerInfo, #chestInfo {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.chestDiv {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    user-select: none;
+}
+
+.chestDiv:hover {
+    background-color: rgba(255,255,255,0.15);
+}
+
+#chestInfoDiv {
+    position: absolute;
+    top: 16vh;
+    left: 25vw;
+    width: calc(25vw - 2vh);
+    height: 82vh;
+    margin: 1vh;
+    padding: 6px;
+    border: 0.4vh solid #dac;
+    background-color: rgb(31, 21, 49);
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 2;
+    display: none;
+}
+
+#artifactListButton {
+    display: block;
+    width: 100%;
+    background-color: rgb(161, 225, 236);
+    border: 3px solid #066;
+    color: #066;
+}
+
+#artifactListDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vh;
+    height: 80vh;
+    background-color: #aaa;
+    border: 5px outset #666;
+    z-index: 3;
+    overflow-y: auto;
+    display: none;
+}
+
+#artifactListCloseButton {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: #999;
+    border: 3px solid #555;
+    color: #555;
+}
+
+#artifactList {
+    margin: 0;
+    height: 100%;
+}
+
+.artifactListIcon {
+    width: 64px;
+    height: 64px;
+    background-size: 64px 64px;
+    background-color: #777;
+    margin-right: 4px;
+    image-rendering: pixelated;
+    display: inline-block;
+}
+
+/* Vases */
+#vaseDiv {
+    position: absolute;
+    bottom: 15px;
+    left: calc(25vw + 15px);
+}
+
+#vaseText {
+    display: inline-block;
+}
+
+.vase {
+    width: 64px;
+    display: inline-block;
+}
+
+/* Item slots */
+#activeItemDivOuter, #inventoryItemDivOuter {
+    display: flex;
+}
+
+.activeItemDiv, .activeItemCompare {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border: 5px outset rgb(224, 219, 212);
+    background-color: rgba(40, 40, 40, 0.5);
+    background-size: 64px 64px;
+    image-rendering: pixelated;
+    margin: 0;
+}
+
+.inventoryItemDiv, .inventoryItemCompare {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border: 5px outset rgb(150, 147, 143);
+    background-color: rgba(40, 40, 40, 0.5);
+    background-size: 64px 64px;
+    image-rendering: pixelated;
+    margin: 0;
+}
+
+/* Item gain overlay */
+#itemGainOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.6);
+    z-index: 4;
+    display: none;
+}
+
+#itemGainText {
+    position: absolute;
+    top: calc(50% - 250px);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 40px;
+}
+
+#itemGainName {
+    position: absolute;
+    top: calc(50% - 210px);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 24px;
+}
+
+#itemGainSubtext {
+    position: absolute;
+    top: calc(50% - 170px);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 24px;
+}
+
+#itemGainIcon {
+    position: absolute;
+    top: calc(50% - 94px);
+    left: calc(50% - 250px);
+    width: 128px;
+    height: 128px;
+    background-size: 128px 128px;
+    background-color: #777;
+    image-rendering: pixelated;
+    display: none;
+}
+
+#itemGainSubtext2 {
+    position: absolute;
+    top: calc(50% - 94px);
+    left: calc(50% - 105px);
+    font-size: 24px;
+    background-color: black;
+}
+
+#itemGainSubtext3 {
+    position: absolute;
+    top: calc(50% + 60px);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 24px;
+}
+
+#activeItemCompareDiv {
+    position: absolute;
+    top: calc(50% + 100px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#inventoryItemCompareDiv {
+    position: absolute;
+    top: calc(50% + 185px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#discardItemButton {
+    position: absolute;
+    top: calc(50% + 275px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    background-color: rgb(223, 151, 151);
+    color: #792525;
+    border: 0.4vh solid rgb(133, 75, 75);
+}
+
+/* Item tooltip */
+#itemTooltip {
+    position: absolute;
+    background-color: black;
+    z-index: 5;
+    display: none;
+    pointer-events: none;
+}
+
+#itemTooltipTitle {
+    font-size: 30px;
+}
+
+/* Mastery */
+#masteryDiv {
+    position: absolute;
+    top: 74vh;
+    width: calc(25vw - 2vh);
+    height: 24vh;
+    margin: 1vh;
+    padding: 6px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    left: 0;
+    border: 0.4vh solid rgb(236, 209, 56);
+    display: none;
+}
+
+.masteryPointUpgrade {
+    background-color: rgba(20, 20, 20, 0.6);
+    border: 3px solid rgb(187, 156, 20);
+    color: rgb(187, 156, 20);
+    margin-bottom: 5px;
+}
+
+.masteryPointUpgrade:disabled {
+    border: 3px solid #777;
+    color: #777;
+}
+
+/* Settings */
+#settingsDiv {
+    position: absolute;
+    top: 82vh;
+    left: 75vw;
+    width: calc(25vw - 2vh);
+    height: 16vh;
+    margin: 1vh;
+    padding: 6px;
+    border: 0.4vh solid #dca;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#versionInfo {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    margin: 0;
+    text-align: right;
+    color: #dca;
+}
