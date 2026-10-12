@@ -100,7 +100,7 @@ hr {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4vh;
+    height: 6vh;
     background-color: rgba(0, 0, 0, 0.4);
     display: none;
 }
@@ -118,11 +118,21 @@ hr {
     transition: ease-out 0.5s;
 }
 
-#potencyBarText, #powerBarText, #masteryBarText {
+#potencyBarText, #powerBarText {
     position: relative;
     color: white;
     text-align: center;
     line-height: 8vh;
+    margin: 0;
+    font-size: 3.2vh;
+    z-index: 2;
+}
+
+#masteryBarText {
+    position: relative;
+    color: white;
+    text-align: center;
+    line-height: 6vh;
     margin: 0;
     font-size: 3.2vh;
     z-index: 2;
