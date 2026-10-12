@@ -255,21 +255,25 @@ function updateUnlocks() {
 updateUnlocks()
 
 function unlockMastery() {
+    document.getElementById("powerBar").style.height = "5.33vh";
+    document.getElementById("potencyBar").style.height = "5.34vh";
     document.getElementById("masteryBar").style.display = "block";
     document.getElementById("masteryDiv").style.display = "block";
-    document.getElementById("powerBar").style.top = "6vh";
-    document.getElementById("potencyBar").style.top = "14vh";
-    document.getElementById("chestInfoDiv").style.top = "22vh";
-    document.getElementById("chestInfoDiv").style.height = "72vh"
-    document.getElementById("towerInfoDiv").style.top = "22vh";
-    document.getElementById("towerInfoDiv").style.height = "72vh"
-    for (let i=0; i<4; i++) {
-        document.getElementsByClassName("gameDiv")[i].style.top = "22vh";
-    }
-    document.getElementsByClassName("gameDiv")[0].style.height = "50vh";
-    document.getElementsByClassName("gameDiv")[1].style.height = "76vh";
-    document.getElementsByClassName("gameDiv")[2].style.height = "76vh";
-    document.getElementsByClassName("gameDiv")[3].style.height = "58vh";
+    document.getElementById("powerBar").style.top = "5.33vh";
+    document.getElementById("potencyBar").style.top = "10.67vh";
+    document.getElementById("powerBarText").style.lineHeight = "5.33vh";
+    document.getElementById("potencyBarText").style.lineHeight = "5.34svh";
+//    document.getElementById("chestInfoDiv").style.top = "22vh";
+//    document.getElementById("chestInfoDiv").style.height = "72vh"
+//    document.getElementById("towerInfoDiv").style.top = "22vh";
+//   document.getElementById("towerInfoDiv").style.height = "72vh"
+//    for (let i=0; i<4; i++) {
+//        document.getElementsByClassName("gameDiv")[i].style.top = "22vh";
+//    }
+//    document.getElementsByClassName("gameDiv")[0].style.height = "50vh";
+//    document.getElementsByClassName("gameDiv")[1].style.height = "76vh";
+//    document.getElementsByClassName("gameDiv")[2].style.height = "76vh";
+//    document.getElementsByClassName("gameDiv")[3].style.height = "58vh";
 }
 
 function updateBars() {
