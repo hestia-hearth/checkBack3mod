@@ -257,19 +257,19 @@ updateUnlocks()
 function unlockMastery() {
     document.getElementById("masteryBar").style.display = "block";
     document.getElementById("masteryDiv").style.display = "block";
-    document.getElementById("powerBar").style.top = "8vh";
-    document.getElementById("potencyBar").style.top = "16vh";
-    document.getElementById("chestInfoDiv").style.top = "24vh";
-    document.getElementById("chestInfoDiv").style.height = "74vh"
-    document.getElementById("towerInfoDiv").style.top = "24vh";
-    document.getElementById("towerInfoDiv").style.height = "74vh"
+    document.getElementById("powerBar").style.top = "6vh";
+    document.getElementById("potencyBar").style.top = "14vh";
+    document.getElementById("chestInfoDiv").style.top = "22vh";
+    document.getElementById("chestInfoDiv").style.height = "72vh"
+    document.getElementById("towerInfoDiv").style.top = "22vh";
+    document.getElementById("towerInfoDiv").style.height = "72vh"
     for (let i=0; i<4; i++) {
-        document.getElementsByClassName("gameDiv")[i].style.top = "24vh";
+        document.getElementsByClassName("gameDiv")[i].style.top = "22vh";
     }
-    document.getElementsByClassName("gameDiv")[0].style.height = "48vh";
-    document.getElementsByClassName("gameDiv")[1].style.height = "74vh";
-    document.getElementsByClassName("gameDiv")[2].style.height = "74vh";
-    document.getElementsByClassName("gameDiv")[3].style.height = "56vh";
+    document.getElementsByClassName("gameDiv")[0].style.height = "50vh";
+    document.getElementsByClassName("gameDiv")[1].style.height = "76vh";
+    document.getElementsByClassName("gameDiv")[2].style.height = "76vh";
+    document.getElementsByClassName("gameDiv")[3].style.height = "58vh";
 }
 
 function updateBars() {
@@ -394,9 +394,14 @@ function updateItemSlots() {
         inventoryItemCompareDiv.appendChild(newCompareDiv);
     }
 
-    const setupSlot = (slotElement, item, type, index) => {
+    const setupSlot = (slotElement, item, type, index, foundamt) => {
         if (slotElement) {
             slotElement.style.backgroundImage = item ? `url('img/item${item.id}.png')` : "none";
+            if (item && type == "active") slotElement.style.border = "5px outset " + rarityColors[rarities.indexOf(item.rarity)];
+            if (item && type == "inventory") slotElement.style.border = "5px outset " + darkRarityColors[rarities.indexOf(item.rarity)];
+            if (item && foundamt >= 10) slotElement.style.backgroundColor = "rgba(255, 221, 0, 0.5)"; 
+            if (item && foundamt >= 50) slotElement.style.backgroundColor = "rgba(153, 238, 238, 0.5)";
+
             
             slotElement.onmousedown = (e) => {
                 if (!item) return;
@@ -601,7 +606,7 @@ function collectTower(x) { // Starts at 1
         
         // Diamond - tripled effects
         if (game.artifactsDiscovered[chosenArtifact.id] >= 50) {
-            const excludedKeys = ['id', 'name', 'rarity', 'type', 'modifier', 'decPotencyCooldowns', 'decTowerWait', 'decChestCost'];
+            const excludedKeys = ['foundamt', 'id', 'name', 'rarity', 'type', 'modifier', 'decPotencyCooldowns', 'decTowerWait', 'decChestCost'];
             for (const key in chosenArtifact) {
                 if (typeof chosenArtifact[key] === 'number' && !excludedKeys.includes(key)) {
                     chosenArtifact[key] *= 3; // Triple the effect
@@ -610,7 +615,7 @@ function collectTower(x) { // Starts at 1
         }
         // Gold - doubled effects
         else if (game.artifactsDiscovered[chosenArtifact.id] >= 10) {
-           const excludedKeys = ['id', 'name', 'rarity', 'type', 'modifier', 'decPotencyCooldowns', 'decTowerWait', 'decChestCost'];
+           const excludedKeys = ['foundamt', 'id', 'name', 'rarity', 'type', 'modifier', 'decPotencyCooldowns', 'decTowerWait', 'decChestCost'];
             for (const key in chosenArtifact) {
                 if (typeof chosenArtifact[key] === 'number' && !excludedKeys.includes(key)) {
                     chosenArtifact[key] *= 2; // Double the effect
@@ -715,7 +720,7 @@ function openChest(x) { // Starts at 0
     }
 
     for (let i=0; i<itemCount; i++) {
-        let { artifact: chosenArtifact, modifier: chosenModifier } = generateArtifact(effectiveProbs);
+        let { artifact: chosenArtifact, modifier: chosenModifier} = generateArtifact(effectiveProbs);
         if (!chosenArtifact) continue; // Skip if no artifact was generated
 
         if (!game.artifactsDiscovered[chosenArtifact.id]) {
@@ -726,7 +731,7 @@ function openChest(x) { // Starts at 0
 
         // Diamond - tripled effects
         if (game.artifactsDiscovered[chosenArtifact.id] >= 50) {
-            const excludedKeys = ['id', 'name', 'rarity', 'type', 'modifier', 'decPotencyCooldowns', 'decTowerWait', 'decChestCost'];
+            const excludedKeys = ['foundamt', 'id', 'name', 'rarity', 'type', 'modifier', 'decPotencyCooldowns', 'decTowerWait', 'decChestCost'];
             for (const key in chosenArtifact) {
                 if (typeof chosenArtifact[key] === 'number' && !excludedKeys.includes(key)) {
                     chosenArtifact[key] *= 3; // Triple the effect
@@ -735,7 +740,7 @@ function openChest(x) { // Starts at 0
         }
         // Gold - doubled effects
         else if (game.artifactsDiscovered[chosenArtifact.id] >= 10) {
-           const excludedKeys = ['id', 'name', 'rarity', 'type', 'modifier', 'decPotencyCooldowns', 'decTowerWait', 'decChestCost'];
+           const excludedKeys = ['foundamt', 'id', 'name', 'rarity', 'type', 'modifier', 'decPotencyCooldowns', 'decTowerWait', 'decChestCost'];
             for (const key in chosenArtifact) {
                 if (typeof chosenArtifact[key] === 'number' && !excludedKeys.includes(key)) {
                     chosenArtifact[key] *= 2; // Double the effect
@@ -888,7 +893,8 @@ function generateArtifact(rarityProbabilties) {
         }
     }
     
-    return { artifact: artifact, modifier: chosenModifier };
+    let foundamt = game.artifactsDiscovered[artifact]
+    return { artifact: artifact, modifier: chosenModifier, foundamt: foundamt };
 }
 
 function displayItemGain(item) {
