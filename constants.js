@@ -92,6 +92,7 @@ const berryNames = ["green", "blue", "red", "yellow", "purple", "silver", "pearl
 const numberOfRarities = 7;
 const rarities = ["common", "uncommon", "rare", "very rare", "legendary", "mythical", "phantasmagoria"];
 const rarityColors = ["#bbb", "#5c5", "#44f", "#80f", "#fb0", "#f00", "#4ff"];
+const darkRarityColors = ["#666", "#282", "#228", "#308", "#760", "#700", "#288"];
 const artifacts = [
     //incPotencyGain, decPotencyCooldowns, incTowerItemChance, decTowerWait, decChestCost
     //incChest1Items, incChest2Items, etc.
